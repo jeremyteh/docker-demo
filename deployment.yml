@@ -1,0 +1,126 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: deployment-fcb64f997-hgjtp
+  generateName: deployment-fcb64f997-
+  namespace: default
+  selfLink: /api/v1/namespaces/default/pods/deployment-fcb64f997-hgjtp
+  uid: 485b3636-dc68-4020-8d87-0f5ef83b83fc
+  resourceVersion: '162615'
+  creationTimestamp: '2020-09-22T02:35:10Z'
+  labels:
+    pod-template-hash: fcb64f997
+    run: deployment
+  ownerReferences:
+    - apiVersion: apps/v1
+      kind: ReplicaSet
+      name: deployment-fcb64f997
+      uid: c9d7023d-3710-4a09-bc4e-f0028926dd21
+      controller: true
+      blockOwnerDeletion: true
+spec:
+  volumes:
+    - name: default-token-9pk77
+      secret:
+        secretName: default-token-9pk77
+        defaultMode: 420
+  containers:
+    - name: deployment
+      image: 'julio01.azurecr.io/docker-demo:latest'
+      resources: {}
+      volumeMounts:
+        - name: default-token-9pk77
+          readOnly: true
+          mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      imagePullPolicy: Always
+  restartPolicy: Always
+  terminationGracePeriodSeconds: 30
+  dnsPolicy: ClusterFirst
+  serviceAccountName: default
+  serviceAccount: default
+  nodeName: aks-agentpool-34384733-vmss000000
+  securityContext: {}
+  schedulerName: default-scheduler
+  tolerations:
+    - key: node.kubernetes.io/not-ready
+      operator: Exists
+      effect: NoExecute
+      tolerationSeconds: 300
+    - key: node.kubernetes.io/unreachable
+      operator: Exists
+      effect: NoExecute
+      tolerationSeconds: 300
+  priority: 0
+  enableServiceLinks: true
+status:
+  phase: Running
+  conditions:
+    - type: Initialized
+      status: 'True'
+      lastProbeTime: null
+      lastTransitionTime: '2020-09-22T02:35:10Z'
+    - type: Ready
+      status: 'True'
+      lastProbeTime: null
+      lastTransitionTime: '2020-09-22T02:35:13Z'
+    - type: ContainersReady
+      status: 'True'
+      lastProbeTime: null
+      lastTransitionTime: '2020-09-22T02:35:13Z'
+    - type: PodScheduled
+      status: 'True'
+      lastProbeTime: null
+      lastTransitionTime: '2020-09-22T02:35:10Z'
+  hostIP: 10.240.0.4
+  podIP: 10.244.0.21
+  podIPs:
+    - ip: 10.244.0.21
+  startTime: '2020-09-22T02:35:10Z'
+  containerStatuses:
+    - name: deployment
+      state:
+        running:
+          startedAt: '2020-09-22T02:35:13Z'
+      lastState: {}
+      ready: true
+      restartCount: 0
+      image: 'julio01.azurecr.io/docker-demo:latest'
+      imageID: >-
+        docker-pullable://julio01.azurecr.io/docker-demo@sha256:d290c68ed320787839f90d418d73fdac110e2dcdc7660cb4853a66df72d0baf9
+      containerID: >-
+        docker://63b8708247074b3c3f4e8b950575399c00070d722e84e0aba0d9b583c85f261a
+      started: true
+  qosClass: BestEffort
+kind: Service
+apiVersion: v1
+metadata:
+  name: deployment-fcb64f997-hgjtp
+  namespace: default
+  selfLink: /api/v1/namespaces/default/services/deployment-fcb64f997-hgjtp
+  uid: 1099435a-cb12-42e7-8cb0-d0eb502f27f4
+  resourceVersion: '163024'
+  creationTimestamp: '2020-09-22T02:37:42Z'
+  labels:
+    pod-template-hash: fcb64f997
+    run: deployment
+  finalizers:
+    - service.kubernetes.io/load-balancer-cleanup
+spec:
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+      nodePort: 30150
+  selector:
+    pod-template-hash: fcb64f997
+    run: deployment
+  clusterIP: 10.0.163.182
+  type: LoadBalancer
+  sessionAffinity: None
+  externalTrafficPolicy: Cluster
+status:
+  loadBalancer:
+    ingress:
+      - ip: 23.98.123.117
