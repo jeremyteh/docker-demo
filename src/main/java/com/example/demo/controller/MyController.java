@@ -10,4 +10,9 @@ public class MyController {
 	public String testDocker() {
 		return "Successfully run java docker image on Aks";
 	}
+	
+	@GetMapping("/test-docker-two")
+	public String testDockerTwo() {
+		return "Another Api";
+	}
 }
